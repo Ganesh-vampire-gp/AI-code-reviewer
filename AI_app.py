@@ -3,9 +3,21 @@ import logging
 logging.getLogger('streamlit').setLevel(logging.ERROR)
 import streamlit as st
 import google.generativeai as ai
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the API key from environment variables
+API_KEY = os.getenv("API_KEY")
+
+# Check if API_KEY is available
+if not API_KEY:
+    raise ValueError("API_KEY not found. Please set it in the .env file.")
 
 # Configure the Google Generative AI with the provided API key
-ai.configure(api_key="AIzaSyD0ilkQIaEK4gdYIGM8s4n7hwzStnDKa-o")
+ai.configure(api_key=API_KEY)
 
 # Define the system prompt for the AI model
 system_prompt = """
